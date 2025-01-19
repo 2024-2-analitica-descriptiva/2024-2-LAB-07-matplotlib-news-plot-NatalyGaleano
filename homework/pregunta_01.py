@@ -19,6 +19,13 @@ def pregunta_01():
     
     import pandas as pd
     import matplotlib.pyplot as plt
+    import os
+
+    # Crear carpeta 'files/plots' si no existe
+    output_dir = os.path.abspath("./files/plots")  # Ruta absoluta
+    if not os.path.exists(output_dir):
+        print(f"Creando la carpeta: {output_dir}")
+        os.makedirs(output_dir)
 
 # Se agrega la figura vacia 
     plt.figure()
@@ -138,13 +145,24 @@ def pregunta_01():
 
     )
     #Finalmente se guarda como PNG
-    plt.tight_layout()
-    plt.savefig("news.png")
-    plt.show()
+
     
-    return plt.show()
+    output_path = os.path.join(output_dir, "news.png")
+
+    try:
+        plt.tight_layout()
+        plt.savefig(output_path)
+        print(f"Gráfico guardado en: {output_path}")
+    except Exception as e:
+        print(f"Error al guardar el gráfico: {e}")
+
+    return 
 
 print(pregunta_01())
+    
+    
+
+
 
 
 
